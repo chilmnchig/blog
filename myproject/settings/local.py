@@ -1,4 +1,4 @@
-from . imoprt base
+from . import base
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
