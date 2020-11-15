@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ blog.title }}{% endblock %}
+
+{% block content %}
+  <h2>{{ blog.title }}</h2>
+  <p>更新日時:{{ blog.published_at}}</p>
+  <p><br>{{ blog.content }}<br></p>
+  <p><br><a href='{% url 'list' %}'>一覧に戻る</a><p>
+{% endblock %}
