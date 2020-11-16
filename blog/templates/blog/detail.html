@@ -3,8 +3,16 @@
 {% block title %}{{ blog.title }}{% endblock %}
 
 {% block content %}
-  <h2>{{ blog.title }}</h2>
-  <p>更新日時:{{ blog.published_at}}</p>
-  <p><br>{{ blog.content }}<br></p>
-  <p><br><a href='{% url 'list' %}'>一覧に戻る</a><p>
+  <div class="blog-detail">
+    <h3>{{ blog.title }}</h3>
+    <div class="blog-detail-published_at">
+      更新日時:{{ blog.published_at }}
+    </div>
+    <div class="blog-detail-content">
+      {{ blog.content }}
+    </div>
+    <div class="blog-detail-back-list">
+      <a href='{% url 'list' %}'>一覧に戻る</a>
+    </div>
+  </div>
 {% endblock %}

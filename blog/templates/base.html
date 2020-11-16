@@ -1,18 +1,47 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ブログ-{% block title %}{% endblock %}</title>
+  <link href="{% static 'css/main.css' %}" rel="stylesheet" type="text/css" />
+  <link href="{% static 'css/responsive.css' %}" rel="stylesheet" href="responsive.css">
 </head>
 <body>
 
   {% block header %}
-  <div class="header">
-    <h1>ブログ</h1>
-  </div>
+  <header>
+    <div class="container">
+      <div class="header-title">
+        <a href="{% url 'list' %}">ブログ</a>
+      </div>
+    </div>
+  </header>
   {% endblock %}
 
-  {% block content %}
+  {% block main %}
+    <div class="wrapper">
+      <div class="container">
+        <div class="info">
+          <div class="contents">
+            <div class="contents-container">
+              {% block content %}
+              {% endblock %}
+            </div>
+          </div>
+          <div class="subinfo">
+            <div class="subinfo-container">
+              <h3>このブログについて</h3>
+              <p>
+                当ブログはプログラミング練習の一環として、学んだことを実践的に生かせるような場をつくるために出来上がったブログサイトです。<br>
+                したがって、ブログを頻繁に更新する気はさらさらありません。
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   {% endblock %}
 
 </body>

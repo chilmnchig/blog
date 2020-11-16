@@ -1,0 +1,46 @@
+@media (max-width: 1000px ) {
+  .contents {
+    width: 60%;
+  }
+
+  .subinfo {
+    width: 40%;
+  }
+
+  .content-title {
+    font-size: 20px;
+    padding-top: 10px;
+  }
+
+  .blog-info: {
+    margin: 3px;
+  }
+
+  .blog-info-title {
+    font-size: 18px;
+    padding: 5px 20px 5px 20px;
+  }
+
+  .blog-info-content {
+    font-size: 14px;
+  }
+
+}
+
+
+@media (max-width: 670px ) {
+  .info {
+    flex-direction: column
+  }
+
+  .contents {
+    width: 100%;
+    padding-right: 0;
+    padding-bottom: 24px;
+  }
+
+  .subinfo {
+    width: 100%;
+  }
+
+}

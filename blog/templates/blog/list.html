@@ -1,23 +1,26 @@
 {% extends 'base.html' %}
 
-{% block title %}リスト{% endblock %}
+{% block title %}一覧{% endblock %}
+
 
 {% block content %}
-  <h2>一覧</h2>
-  <table>
-    <thead>
-    <tr>
-      <th>タイトル</th>
-      <th>更新日時</th>
-    </tr>
-    </thead>
-    <tbody>
+  <div class="content-title">記事一覧</div>
+  <div class="content-list">
     {% for blog in blogs %}
-      <tr>
-        <td><a href='{% url "detail" blog.id %}'>{{ blog.title }}</a></td>
-        <td>{{ blog.published_at }}</td>
+      <div class="blog-info">
+        <div class="blog-info-title">
+          <a href='{% url "detail" blog.id %}'>
+            {{ blog.title }}
+          </a>
+        </div>
+        <div class="blog-info-content">
+          {{ blog.content }}
+          <a href='{% url "detail" blog.id %}'>続きを読む</a>
+        </div>
+        <div class="blog-info-published_at">
+          {{ blog.published_at.date }}
+        </div>
+      </div>
     {% endfor %}
-      </tr>
-    </tbody>
-  </table>
+  </div>
 {% endblock %}

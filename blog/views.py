@@ -11,6 +11,10 @@ from blog.forms import BlogForm
 
 def blog_list(request):
     blogs = Blog.objects.filter(is_public=True, published_at__lte=timezone.now()).order_by('-published_at').all()
+    for blog in blogs:
+        if len(blog.content) > 50:
+            blog.content = blog.content[:50]
+            blog.content += "..."
     return TemplateResponse(request, 'blog/list.html', {'blogs': blogs})
 
 
