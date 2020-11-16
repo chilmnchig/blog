@@ -106,9 +106,11 @@ header {
   text-align: left;
   font-size: 24px;
   padding: 7px 24px;
-  text-decoration: none;
 }
 
+.blog-info-title a {
+  text-decoration: none;
+}
 
 .blog-info-title a:hover{
   color: red
