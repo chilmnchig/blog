@@ -99,6 +99,7 @@ header {
   border: 1px solid rgba(0, 0, 0, 1);
   margin: 18px;
   border-radius: 12px;
+  padding-top: 6px;
 }
 
 
@@ -113,7 +114,8 @@ header {
 }
 
 .blog-info-title a:hover{
-  color: red
+  color: red;
+  text-decoration: underline;
 }
 
 
