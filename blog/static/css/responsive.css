@@ -59,6 +59,10 @@
     padding-top: 6px;
   }
 
+  .blog-info-published_at {
+    padding-top: 5px;
+  }
+
   .blog-detail-published_at {
     font-size: 12px;
   }
