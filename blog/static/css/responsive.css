@@ -59,6 +59,10 @@
     padding-top: 6px;
   }
 
+  .blog-detail-published_at {
+    font-size: 12px;
+  }
+
   .subinfo {
     width: 100%;
   }
