@@ -29,6 +29,10 @@
 
 
 @media (max-width: 670px ) {
+  .wrapper {
+    border-radius: 0;
+  }
+
   .info {
     flex-direction: column
   }
@@ -39,8 +43,32 @@
     padding-bottom: 24px;
   }
 
+  .contents-container {
+    padding: 10px 0 0 0;
+    margin: 0;
+    border-left: 0;
+    border-right: 0;
+    border-radius: 0;
+  }
+
+  .blog-info {
+    border-left: 0;
+    border-right: 0;
+    margin: 18px 0;
+    border-radius: 0;
+    padding-top: 6px;
+  }
+
   .subinfo {
     width: 100%;
+  }
+
+  .subinfo-container {
+    padding: 0 12px;
+    border-right: 0;
+    border-left: 0;
+    border-radius: 0;
+    background-color: rgba(0, 255, 0, 0.03);
   }
 
 }
