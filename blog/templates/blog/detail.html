@@ -9,7 +9,7 @@
       更新日時:{{ blog.published_at }}
     </div>
     <div class="blog-detail-content">
-      {{ blog.content }}
+      {{ blog.content | linebreaksbr }}
     </div>
     <div class="blog-detail-back-list">
       <a href='{% url 'list' %}'>一覧に戻る</a>
