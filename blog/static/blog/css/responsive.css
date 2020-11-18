@@ -1,6 +1,12 @@
 @media (max-width: 1000px ) {
+  .info {
+    flex-direction: column
+  }
+
   .contents {
-    width: 60%;
+    width: 100%;
+    padding-right: 0;
+    padding-bottom: 24px;
   }
 
   .subinfo {
@@ -17,11 +23,6 @@
   }
 
 
-  .blog-info-right {
-    flex-basis: 50%;
-  }
-
-
   .blog-info-title {
     font-size: 18px;
     padding: 5px 20px 5px 20px;
@@ -31,22 +32,16 @@
     font-size: 14px;
   }
 
+  .subinfo {
+    width: 100%;
+  }
+
 }
 
 
 @media (max-width: 670px ) {
   .wrapper {
     border-radius: 0;
-  }
-
-  .info {
-    flex-direction: column
-  }
-
-  .contents {
-    width: 100%;
-    padding-right: 0;
-    padding-bottom: 24px;
   }
 
   .contents-container {
@@ -65,6 +60,9 @@
     padding-top: 6px;
   }
 
+  .blog-info-right {
+    flex-basis: 45%;
+  }
 
   .blog-info-content {
     padding: 0 12px;
@@ -79,9 +77,6 @@
     font-size: 12px;
   }
 
-  .subinfo {
-    width: 100%;
-  }
 
   .subinfo-container {
     padding: 0 12px;
