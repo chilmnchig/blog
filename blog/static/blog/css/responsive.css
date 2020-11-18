@@ -16,6 +16,12 @@
     margin: 3px;
   }
 
+
+  .blog-info-right {
+    flex-basis: 50%;
+  }
+
+
   .blog-info-title {
     font-size: 18px;
     padding: 5px 20px 5px 20px;
@@ -58,6 +64,7 @@
     border-radius: 0;
     padding-top: 6px;
   }
+
 
   .blog-info-content {
     padding: 0 12px;

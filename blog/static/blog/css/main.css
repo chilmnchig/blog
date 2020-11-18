@@ -122,7 +122,7 @@ header {
 
 
 .blog-info-right {
-  width: 35%;
+  flex-basis: 35%;
 }
 
 
