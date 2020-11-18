@@ -8,18 +8,40 @@
   <div class="content-list">
     {% for blog in blogs %}
       <div class="blog-info">
-        <div class="blog-info-title">
-          <a href='{% url "detail" blog.id %}'>
-            {{ blog.title }}
-          </a>
+        <div class="blog-info-wrapper">
+          <div class="blog-info-left">
+            <div class="blog-info-title">
+              <a href='{% url "detail" blog.id %}'>
+                {{ blog.title }}
+              </a>
+            </div>
+            <div class="blog-info-content">
+              {{ blog.content }}
+              <a href='{% url "detail" blog.id %}'>詳しく読む</a>
+            </div>
+            {% if blog.image %}
+              <div class="blog-info-published_at">
+                {{ blog.published_at.date }}
+              </div>
+            {% endif %}
+          </div>
+          {% if blog.image %}
+            <div class="blog-info-right">
+              <div class="blog-info-img">
+                <a href='{% url "detail" blog.id %}'>
+                  <img src="{{ blog.image.url }}" alt="{{ blog.title }}" width=100%>
+                </a>
+              </div>
+            </div>
+          {% endif %}
         </div>
-        <div class="blog-info-content">
-          {{ blog.content }}
-          <a href='{% url "detail" blog.id %}'>続きを読む</a>
+        {% if not blog.image %}
+        <div class="blog-info-footer">
+          <div class="blog-info-published_at">
+            {{ blog.published_at.date }}
+          </div>
         </div>
-        <div class="blog-info-published_at">
-          {{ blog.published_at.date }}
-        </div>
+        {% endif %}
       </div>
     {% endfor %}
   </div>

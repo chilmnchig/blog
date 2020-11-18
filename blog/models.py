@@ -9,6 +9,8 @@ class Blog(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     published_at = models.DateTimeField(blank=True, null=True)
     is_public = models.BooleanField(default=False)
+    image = models.ImageField(
+        upload_to='blog_images/', null=True, blank=True)
 
     class Meta:
         db_table = 'blog'
@@ -23,3 +25,8 @@ class Blog(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class ContentImage(models.Model):
+    blog = models.ForeignKey(Blog, on_delete=models.PROTECT)
+    content_image = models.ImageField(upload_to='blog_content_images/')
