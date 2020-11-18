@@ -73,10 +73,13 @@
     padding-bottom: 5px;
   }
 
+  .blog-detail-content {
+    font-size: 14px;
+  }
+
   .blog-detail-published_at {
     font-size: 12px;
   }
-
 
   .subinfo-container {
     padding: 0 12px;
