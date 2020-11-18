@@ -8,18 +8,19 @@ from django.utils import timezone
 from blog.models import Blog
 from blog.forms import BlogForm
 
+import re
+
 
 def blog_list(request):
     blogs = Blog.objects.filter(is_public=True, published_at__lte=timezone.now()).order_by('-published_at').all()
     for blog in blogs:
-        if len(blog.content) > 50:
-            blog.content = blog.content[:50]
-            blog.content += "..."
+        blog.info_content()
     return TemplateResponse(request, 'blog/list.html', {'blogs': blogs})
 
 
 def blog_detail(request, blog_id):
     blog = get_object_or_404(Blog, id=blog_id, is_public=True, published_at__lte=timezone.now())
+    blog.sort_content()
     return TemplateResponse(request, 'blog/detail.html', {'blog': blog})
 
 

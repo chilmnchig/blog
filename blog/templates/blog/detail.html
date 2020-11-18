@@ -9,7 +9,9 @@
       更新日時:{{ blog.published_at }}
     </div>
     <div class="blog-detail-content">
-      {{ blog.content | linebreaksbr }}
+      {% for blog_part in blog.sort_content %}
+        {% cycle blog_part|linebreaksbr blog_part|safe %}
+      {% endfor %}
     </div>
     <div class="blog-detail-back-list">
       <a href='{% url 'list' %}'>一覧に戻る</a>
