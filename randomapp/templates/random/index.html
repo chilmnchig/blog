@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+    <title>ランダムアプリ</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="text-center m-2">
+        ランダムに整数を表示します
+      </div>
+      <form method="post">
+        {% csrf_token %}
+        <div class="row">
+          <div class="mx-auto text-center">
+            <label for="min">最小値</label>
+            <input type="number" class="col-4 mx-auto text-center" name="min" value={{ min }}>
+          </div>
+        </div>
+        <div class="row">
+          <div class="mx-auto text-center">
+            <label for="max">最大値</label>
+            <input type="number" class="col-4 mx-auto text-center" name="max" value={{ max }}>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-4 mx-auto text-center">
+            <input type="submit" class="btn btn-light" value="表示">
+          </div>
+        </div>
+      </form>
+      {% if result %}
+        {% if not error %}
+          <h2 class="text-center">{{ result }}</h2>
+        {% else %}
+          <p class="text-danger text-center">{{ result }}</p>
+        {% endif %}
+      {% endif %}
+    </div>
+  </body>
+</html>
