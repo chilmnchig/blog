@@ -15,8 +15,7 @@
       <div class="text-center m-2">
         ランダムに整数を表示します
       </div>
-      <form method="post">
-        {% csrf_token %}
+      <form method="get">
         <div class="row">
           <div class="mx-auto text-center">
             <label for="min">最小値</label>
@@ -31,7 +30,7 @@
         </div>
         <div class="row">
           <div class="col-4 mx-auto text-center">
-            <input type="submit" class="btn btn-light" value="表示">
+            <input type="submit" class="btn btn-light" name="display" value="表示">
           </div>
         </div>
       </form>

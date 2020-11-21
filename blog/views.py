@@ -8,8 +8,6 @@ from django.utils import timezone
 from blog.models import Blog
 from blog.forms import BlogForm
 
-import re
-
 
 def blog_list(request):
     blogs = Blog.objects.filter(is_public=True, published_at__lte=timezone.now()).order_by('-published_at').all()

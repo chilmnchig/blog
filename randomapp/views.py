@@ -3,14 +3,13 @@ from django.template.response import TemplateResponse
 from django.shortcuts import get_object_or_404, redirect
 
 from random import randint
-from django.views.decorators.clickjacking import xframe_options_exempt
 
-@xframe_options_exempt
+
 def perform(request):
-    if request.method == "POST":
+    if request.GET.get("display"):
         try:
-            min = int(request.POST["min"])
-            max = int(request.POST["max"])
+            min = int(request.GET.get("min"))
+            max = int(request.GET.get("max"))
             result = randint(min, max)
             error = False
         except:

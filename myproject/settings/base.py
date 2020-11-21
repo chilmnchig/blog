@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'blog.apps.BlogConfig',
     'randomapp.apps.RandomappConfig',
+    'applications.apps.ApplicationsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -46,6 +47,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+X_FRAME_OPTIONS = 'ALLOW'
 
 ROOT_URLCONF = 'myproject.urls'
 
