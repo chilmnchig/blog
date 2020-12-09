@@ -44,5 +44,22 @@
         {% endif %}
       </div>
     {% endfor %}
+    <div class="paginator">
+      {% if blogs.has_previous %}
+        <a href="?page=1">&lt;&lt; 最初へ</a>
+        <a href="?page={{ blogs.previous_page_number }}">&lt; 前へ</a>
+      {% endif %}
+      {% for num in blogs.pages %}
+        {% if blogs.number == num %}
+          <a>{{ num }}</a>
+        {% else %}
+          <a href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+      {% endfor %}
+      {% if blogs.has_next %}
+        <a href="?page={{ blogs.next_page_number }}">次へ &gt;</a>
+        <a href="?page={{ blogs.last }}">最後へ &gt;&gt;</a>
+      {% endif %}
+    </div>
   </div>
 {% endblock %}
