@@ -50,11 +50,14 @@ def blog_detail(request, blog_id):
 @login_required
 def blog_add(request):
     if request.method == 'POST':
-        form = BlogForm(request.POST)
+        form = BlogForm(request.POST, request.FILES)
         if form.is_valid():
             blog = form.save(commit=False)
             blog.save()
-            return redirect('detail', blog_id=blog.id)
+            if 'upload' in request.POST:
+                return redirect('image_upload')
+            else:
+                return redirect('detail', blog_id=blog.id)
     else:
         form = BlogForm()
     return TemplateResponse(request, 'blog/addBlog.html', {'form': form})
@@ -82,10 +85,11 @@ def user_menu(request):
 def edit(request, blog_id):
     blog = get_object_or_404(Blog, id=blog_id)
     confirm = False
+    images = ContentImage.objects.filter(blog=blog)
     if request.method == 'GET':
         form = BlogForm(instance=blog)
     else:
-        form = BlogForm(request.POST, instance=blog)
+        form = BlogForm(request.POST, request.FILES, instance=blog)
         if 'confirmed' in request.POST:
             if request.POST['confirmed'] == 'はい':
                 blog.delete()
@@ -100,6 +104,7 @@ def edit(request, blog_id):
     return TemplateResponse(request, 'blog/edit.html', {'form': form,
                                                         'blog_id': blog_id,
                                                         'confirm': confirm,
+                                                        'images': images
                                                         })
 
 
@@ -131,7 +136,7 @@ def image_upload(request):
         if form.is_valid():
             image = form.save(commit=False)
             image.save()
-            return redirect('edit', blog_id=image.blog.id)
+            return redirect('image_upload')
     else:
         form = ContentImageForm()
     return TemplateResponse(request, 'blog/addImage.html', {'form': form})

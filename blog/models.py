@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 
 import re
+import requests
 
 
 class Blog(models.Model):

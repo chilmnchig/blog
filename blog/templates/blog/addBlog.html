@@ -4,9 +4,12 @@
 
 {% block content %}
   <div class="addBlog">
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
       {{ form.as_p }}
+      <input type="submit" name="upload" value="保存して写真をアップロードする">
+      <br>
+      <br>
       <input type="submit" value="追加">
     </form>
     <a href='{% url 'user_menu' %}'>管理者メニューへ戻る</a>

@@ -3,7 +3,7 @@
 {% block title %}編集{% endblock %}
 
 {% block content %}
-  <form method="post">
+  <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="変更">
@@ -16,6 +16,13 @@
     {% else %}
       <input type="submit" name='delete' value="削除">
     {% endif %}
+    <br>
+    <h3>紐づけされた画像のURL</h3>
+    {% for image in images %}
+      <p>{{ image.content_image.url }}</p>
+    {% empty %}
+      <p>なし</p>
+    {% endfor %}
   </form>
   <br>
   <a href='{% url 'detail' blog_id %}'>記事に戻る</a>
