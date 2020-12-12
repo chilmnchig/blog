@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}追加{% endblock %}
+
+{% block content %}
+  <div class="addBlog">
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" value="追加">
+    </form>
+    <a href='{% url 'user_menu' %}'>管理者メニューへ戻る</a>
+  </div>
+{% endblock %}

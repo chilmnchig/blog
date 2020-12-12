@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}タイトル一覧{% endblock %}
+
+
+{% block content %}
+  <div class="text-left">
+    <ul>
+      {% for blog in blogs %}
+        <li>
+          <a href='{% url "edit" blog.id %}'>{{ blog.title }}</a>
+          <span>{{ blog.published_at.date }}</span>
+          {% if not blog.is_public %}
+            <span>※非公開</span>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="paginator">
+    {% if blogs.has_previous %}
+      <a href="?page=1">&lt;&lt; 最初へ</a>
+      <a href="?page={{ blogs.previous_page_number }}">&lt; 前へ</a>
+    {% endif %}
+    {% for num in blogs.pages %}
+      {% if blogs.number == num %}
+        <a>{{ num }}</a>
+      {% else %}
+        <a href="?page={{ num }}">{{ num }}</a>
+      {% endif %}
+    {% endfor %}
+    {% if blogs.has_next %}
+      <a href="?page={{ blogs.next_page_number }}">次へ &gt;</a>
+      <a href="?page={{ blogs.last }}">最後へ &gt;&gt;</a>
+    {% endif %}
+  </div>
+  <a href="{% url 'user_menu' %}">管理者メニューへ戻る</a>
+{% endblock %}
