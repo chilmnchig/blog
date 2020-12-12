@@ -12,7 +12,7 @@
           <div class="blog-info-left">
             <div class="blog-info-title">
               <a href='{% url "detail" blog.id %}'>
-                {{ blog.title }}
+                {{ blog.title }}{% if not blog.is_public %}(非公開){% endif %}
               </a>
             </div>
             <div class="blog-info-content">

@@ -42,6 +42,9 @@ hgroup h2,h4,h5,h6 {
     /* 要素の高さ：24px（要素を配置するときの高さの基準） */
 }
 
+.text-left {
+  text-align: left;
+}
 
 header {
   background-color: rgb(248.6, 248.6, 248.6);
@@ -248,4 +251,19 @@ iframe {
   border: 1px solid rgba(0, 0, 0, 1);
   border-radius: 24px;
   background-color: rgb(245, 255, 245);
+}
+
+
+footer {
+  padding-top: 8px;
+  background-color: rgb(245, 245, 245);
+  height: 48px;
+  width: 100%;
+  text-align: right;
+}
+
+footer a{
+  color: black;
+  text-decoration: none;
+  margin: 0 7px;
 }

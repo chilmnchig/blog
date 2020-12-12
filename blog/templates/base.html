@@ -44,5 +44,18 @@
     </div>
   {% endblock %}
 
+  {% block footer %}
+  <footer>
+    <div class="container">
+      {% if user.is_authenticated %}
+        <a href='{% url 'user_menu' %}'>管理者メニュー</a>
+        <a href='{% url 'logout' %}'>ログアウト</a>
+      {% else %}
+        <a href='{% url 'login' %}'>管理者ログイン</a>
+      {% endif %}
+    </div>
+  </footer>
+  {% endblock %}
+
 </body>
 </html>

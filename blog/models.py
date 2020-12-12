@@ -11,8 +11,8 @@ class Blog(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     published_at = models.DateTimeField(blank=True, null=True)
     is_public = models.BooleanField(default=False)
-    image = models.ImageField(
-        upload_to='blog_images/', null=True, blank=True)
+    image = models.ImageField(upload_to='blog_images/', null=True, blank=True)
+
 
     class Meta:
         db_table = 'blog'
@@ -26,16 +26,13 @@ class Blog(models.Model):
             self.published_at = timezone.now()
         super().save(*args, **kwargs)
 
-
     def __str__(self):
         return self.title
-
 
     def sort_content(self):
         self.sort_content = re.split('<html>|</html>', self.content)
         if len(self.sort_content) % 2 == 0:
             self.sort_content.append("")
-
 
     def info_content(self):
         self.sort_content()
