@@ -26,4 +26,5 @@ urlpatterns = [
     path('<int:blog_id>/edit', blog.views.edit, name='edit'),
     path('text_list', blog.views.blog_text_list, name='text_list'),
     path('upload/', blog.views.image_upload, name='image_upload'),
+    path('image_list', blog.views.image_list, name='image_list'),
 ]

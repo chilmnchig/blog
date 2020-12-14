@@ -4,12 +4,14 @@ from django.contrib.auth.decorators import login_required
 
 from blog.models import Blog, ContentImage
 from blog.forms import BlogForm, SignUpForm, ContentImageForm
-from blog.paginator import get_pagination
+from blog.paginator import get_pagination, page_for_two
 
 
 def blog_list(request):
     blogs = Blog.get_list(request)
     blogs = get_pagination(request, blogs, per_page=5)
+    for blog in blogs:
+        blog.info_content()
     return TemplateResponse(request, 'blog/list.html', {'blogs': blogs})
 
 
@@ -102,3 +104,18 @@ def image_upload(request):
     else:
         form = ContentImageForm()
     return TemplateResponse(request, 'blog/addImage.html', {'form': form})
+
+
+@login_required
+def image_list(request):
+    blogs_inc_image = Blog.objects.filter(image__isnull=False
+                                           ).exclude(image=''
+                                                     ).order_by('-published_at')
+    content_images = ContentImage.objects.all()
+    blogs, c_imgs, page = page_for_two(request,
+                                       blogs_inc_image,
+                                       content_images,
+                                       p_page_blogs=10,
+                                       p_page_imgs=20)
+    context = {'blogs': blogs, 'content_images': c_imgs, 'page': page}
+    return TemplateResponse(request, 'blog/image_list.html', context)
