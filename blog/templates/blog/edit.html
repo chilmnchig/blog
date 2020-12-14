@@ -9,6 +9,9 @@
     <input type="submit" value="変更">
     <br>
     <br>
+    <input type="submit" name="upload" value="保存して写真をアップロードする">
+    <br>
+    <br>
     {% if confirm %}
       <p>本当に削除しますか？</p>
       <input type="submit" name="confirmed" value="はい">
@@ -19,7 +22,12 @@
     <br>
     <h3>紐づけされた画像のURL</h3>
     {% for image in images %}
-      <p>{{ image.content_image.url }}</p>
+      <form method="post">
+        {% csrf_token %}
+        <p>{{ image.content_image.url }}</p>
+        <input type="hidden" name="delete_image_id" value={{ image.id }}>
+        <input type="submit" name="delete_image" value="画像を削除する">
+      </form>
     {% empty %}
       <p>なし</p>
     {% endfor %}

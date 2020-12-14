@@ -20,6 +20,5 @@ class ContentImageAdmin(admin.ModelAdmin):
     list_display = ('blog', 'content_image')
 
 
-
 admin.site.register(Blog, BlogAdmin)
 admin.site.register(ContentImage, ContentImageAdmin)

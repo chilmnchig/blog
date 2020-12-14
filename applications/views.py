@@ -1,5 +1,5 @@
 from django.template.response import TemplateResponse
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import redirect
 from django.urls import reverse
 from urllib.parse import urlencode
 
@@ -19,7 +19,9 @@ def monty_open(res, ans):
         result = nums[0]
     return result
 
+
 nums = [1, 2, 3]
+
 
 def show_percentage():
     objects = MontyHole.objects.all()
@@ -49,7 +51,7 @@ def show_percentage():
 
 def index(request):
     if request.method == "POST":
-        if request.POST.get("select"):#ドアを最初に動作を選んだとき
+        if request.POST.get("select"):  # ドアを最初に動作を選んだとき
             res = request.POST.get("select")[0]
             res = int(res)
             ans = random.randint(1, 3)
@@ -89,9 +91,17 @@ def index(request):
 
     restart = False
     p_changed, p_not_changed = show_percentage()
-    dict = {'nums': nums, 'res': res, 'ans': ans, 'opened': opened, 'open': open,
-            'change': change, 'judge': judge, 'restart': restart,
-            'p_changed': p_changed, 'p_not_changed': p_not_changed}
+    dict = {'nums': nums,
+            'res': res,
+            'ans': ans,
+            'opened': opened,
+            'open': open,
+            'change': change,
+            'judge': judge,
+            'restart': restart,
+            'p_changed': p_changed,
+            'p_not_changed': p_not_changed
+            }
     return TemplateResponse(request, "monty_hole/index.html", dict)
 
 
@@ -117,10 +127,18 @@ def result(request):
 
     restart = True
     p_changed, p_not_changed = show_percentage()
-    dict = {'nums': nums, 'res': res, 'ans': ans, 'opened': opened, 'open': open,
-            'change': change, 'judge': judge, 'restart': restart,
-            'p_changed': p_changed, 'p_not_changed': p_not_changed}
-    if not "" in list(dict.values()):
+    dict = {'nums': nums,
+            'res': res,
+            'ans': ans,
+            'opened': opened,
+            'open': open,
+            'change': change,
+            'judge': judge,
+            'restart': restart,
+            'p_changed': p_changed,
+            'p_not_changed': p_not_changed
+            }
+    if "" not in list(dict.values()):
         return TemplateResponse(request, "monty_hole/index.html", dict)
     else:
         return redirect('index')
