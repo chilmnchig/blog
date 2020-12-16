@@ -1,17 +1,16 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
-def make_range_ten(blogs, page, page_max):
+def make_page_info(page, page_max):
     if page <= 5:
-        blogs.pages = range(1, min(10, page_max) + 1)
+        page_range = range(1, min(10, page_max) + 1)
     elif page >= page_max - 4:
-        blogs.pages = range(max(1, page_max - 9),
+        page_range = range(max(1, page_max - 9),
                             page_max + 1
                             )
     else:
-        blogs.pages = range(page - 5, page + 5)
-    blogs.last = page_max
-    return blogs
+        page_range = range(page - 5, page + 5)
+    return [page, page_max, page_range]
 
 
 def get_pagination(request, blogs, per_page):
@@ -25,8 +24,8 @@ def get_pagination(request, blogs, per_page):
 
     page = blogs.number
     page_max = paginator.num_pages
-    blogs = make_range_ten(blogs, page, page_max)
-    return blogs
+    page_info = make_page_info(page, page_max)
+    return blogs, page_info
 
 
 def page_for_two(request, blogs, imgs, p_page_blogs, p_page_imgs):
@@ -54,5 +53,5 @@ def page_for_two(request, blogs, imgs, p_page_blogs, p_page_imgs):
         blogs = paginator_blogs.page(1)
         imgs = paginator_imgs.page(1)
 
-    blogs = make_range_ten(blogs, page, page_max)
-    return blogs, imgs, page
+    page_info = make_page_info(page, page_max)
+    return blogs, imgs, page_info

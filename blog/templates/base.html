@@ -4,7 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>{% block title %}{% endblock %} | プログラミング練習用ブログ</title>
+
   <link href="{% static 'blog/css/main.css' %}" rel="stylesheet" type="text/css" />
   <link href="{% static 'blog/css/responsive.css' %}" rel="stylesheet" href="responsive.css">
   <link rel="icon" href="{% static 'blog/img/favicon.png' %}">
@@ -14,9 +16,15 @@
   {% block header %}
   <header>
     <div class="container">
-      <div class="header-title">
+      <span class="header-title">
         <a href="{% url 'list' %}">ブログ</a>
-      </div>
+      </span>
+      <span class="query">
+        <form method="get" action="{% url 'list' %}">
+          <input type="text" name="keyword" value="{{ request.GET.keyword }}" placeholder="記事を検索する">
+          <input type="submit" value="検索">
+        </form>
+      </span>
     </div>
   </header>
   {% endblock %}
@@ -47,12 +55,20 @@
   {% block footer %}
   <footer>
     <div class="container">
-      {% if user.is_authenticated %}
-        <a href='{% url 'user_menu' %}'>管理者メニュー</a>
-        <a href='{% url 'logout' %}'>ログアウト</a>
-      {% else %}
-        <a href='{% url 'login' %}'>管理者ログイン</a>
-      {% endif %}
+      <div class="query">
+        <form method="get" action="{% url 'list' %}">
+          <input type="text" name="keyword" value="{{ request.GET.keyword }}" placeholder="記事を検索する">
+          <input type="submit" value="検索">
+        </form>
+      </div>
+      <div class="admin">
+        {% if user.is_authenticated %}
+          <a href='{% url 'user_menu' %}'>管理者メニュー</a>
+          <a href='{% url 'logout' %}'>ログアウト</a>
+        {% else %}
+          <a href='{% url 'login' %}'>管理者ログイン</a>
+        {% endif %}
+      </div>
     </div>
   </footer>
   {% endblock %}

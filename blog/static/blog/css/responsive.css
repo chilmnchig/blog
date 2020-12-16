@@ -40,6 +40,10 @@
 
 
 @media (max-width: 670px ) {
+  header .query {
+    display: none;
+  }
+
   .wrapper {
     border-radius: 0;
   }

@@ -2,6 +2,8 @@ from django.db import models
 from django.utils import timezone
 from django.shortcuts import get_object_or_404, redirect
 
+from blog.search import search_objects
+
 import re
 
 
@@ -55,6 +57,11 @@ class Blog(models.Model):
             blogs = cls.objects.filter(is_public=True,
                                        published_at__lte=timezone.now()
                                        ).order_by('-published_at')
+
+        keyword = request.GET.get('keyword')
+        if keyword:
+            blogs = search_objects(blogs, keyword)
+
         return blogs
 
     @classmethod

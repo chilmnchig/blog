@@ -9,10 +9,15 @@ from blog.paginator import get_pagination, page_for_two
 
 def blog_list(request):
     blogs = Blog.get_list(request)
-    blogs = get_pagination(request, blogs, per_page=5)
+    blogs, page_info = get_pagination(request, blogs, per_page=5)
     for blog in blogs:
         blog.info_content()
-    return TemplateResponse(request, 'blog/list.html', {'blogs': blogs})
+    page = page_info[0]
+    page_max = page_info[1]
+    page_range = page_info[2]
+    context = {'blogs': blogs, 'page': page, 'page_max': page_max,
+               'page_range': page_range}
+    return TemplateResponse(request, 'blog/list.html', context)
 
 
 def blog_detail(request, blog_id):
@@ -66,13 +71,13 @@ def edit(request, blog_id):
 
         if 'delete_image' in request.POST:  # 紐づけ画像の削除
             delete_image(request)
-        elif 'delete' in request.POST:  #削除ボタンを押す
-            confirm = True  #確認画面へ
-        elif 'confirmed' in request.POST:  #確認画面での選択
+        elif 'delete' in request.POST:  # 削除ボタンを押す
+            confirm = True  # 確認画面へ
+        elif 'confirmed' in request.POST:  # 確認画面での選択
             if request.POST['confirmed'] == "はい":
-                blog.delete()  #削除実行
+                blog.delete()  # 削除実行
                 return redirect('text_list')
-        elif form.is_valid():  #内容変更の保存
+        elif form.is_valid():  # 内容変更の保存
             blog = form.save()
             return blog.save_next(request)
 
@@ -90,8 +95,13 @@ def edit(request, blog_id):
 @login_required
 def blog_text_list(request):
     blogs = Blog.get_list(request)
-    blogs = get_pagination(request, blogs, per_page=30)
-    return TemplateResponse(request, 'blog/text_list.html', {'blogs': blogs})
+    blogs, page_info = get_pagination(request, blogs, per_page=30)
+    page = page_info[0]
+    page_max = page_info[1]
+    page_range = page_info[2]
+    context = {'blogs': blogs, 'page': page, 'page_max': page_max,
+               'page_range': page_range}
+    return TemplateResponse(request, 'blog/text_list.html', context)
 
 
 @login_required
@@ -109,13 +119,17 @@ def image_upload(request):
 @login_required
 def image_list(request):
     blogs_inc_image = Blog.objects.filter(image__isnull=False
-                                           ).exclude(image=''
-                                                     ).order_by('-published_at')
+                                          ).exclude(image=''
+                                                    ).order_by('-published_at')
     content_images = ContentImage.objects.all()
-    blogs, c_imgs, page = page_for_two(request,
-                                       blogs_inc_image,
-                                       content_images,
-                                       p_page_blogs=10,
-                                       p_page_imgs=20)
-    context = {'blogs': blogs, 'content_images': c_imgs, 'page': page}
+    blogs, c_imgs, page_info = page_for_two(request,
+                                            blogs_inc_image,
+                                            content_images,
+                                            p_page_blogs=10,
+                                            p_page_imgs=20)
+    page = page_info[0]
+    page_max = page_info[1]
+    page_range = page_info[2]
+    context = {'blogs': blogs, 'content_images': c_imgs,
+               'page': page, 'page_max': page_max, 'page_range': page_range}
     return TemplateResponse(request, 'blog/image_list.html', context)

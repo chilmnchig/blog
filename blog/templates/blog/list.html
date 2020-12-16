@@ -4,7 +4,13 @@
 
 
 {% block content %}
-  <div class="content-title">記事一覧</div>
+  <div class="content-title">
+    {% if request.GET.keyword %}
+      検索結果
+    {% else %}
+      記事一覧
+    {% endif %}
+  </div>
   <div class="content-list">
     {% for blog in blogs %}
       <div class="blog-info">
@@ -45,20 +51,20 @@
       </div>
     {% endfor %}
     <div class="paginator">
-      {% if blogs.has_previous %}
+      {% if page >= 2 %}
         <a href="?page=1">&lt;&lt; 最初へ</a>
-        <a href="?page={{ blogs.previous_page_number }}">&lt; 前へ</a>
+        <a href="?page={{ page|add:'-1' }}">&lt; 前へ</a>
       {% endif %}
-      {% for num in blogs.pages %}
-        {% if blogs.number == num %}
+      {% for num in page_range %}
+        {% if page == num %}
           <a>{{ num }}</a>
         {% else %}
           <a href="?page={{ num }}">{{ num }}</a>
         {% endif %}
       {% endfor %}
-      {% if blogs.has_next %}
-        <a href="?page={{ blogs.next_page_number }}">次へ &gt;</a>
-        <a href="?page={{ blogs.last }}">最後へ &gt;&gt;</a>
+      {% if page < page_max %}
+        <a href="?page={{ page|add:'1' }}">次へ &gt;</a>
+        <a href="?page={{ page_max }}">最後へ &gt;&gt;</a>
       {% endif %}
     </div>
   </div>

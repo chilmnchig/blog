@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse
 
-from . import models
+import blog.models
 
 
 def factory_blog(**kwargs):
@@ -10,7 +10,7 @@ def factory_blog(**kwargs):
          'is_public': True,
          }
     d.update(kwargs)
-    return models.Blog.objects.create(**d)
+    return blog.models.Blog.objects.create(**d)
 
 
 class TestList(TestCase):
