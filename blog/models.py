@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils import timezone
 from django.shortcuts import get_object_or_404, redirect
+from django.urls import reverse
+from urllib.parse import urlencode
 
 from blog.search import search_objects
 
@@ -29,7 +31,10 @@ class Blog(models.Model):
 
     def save_next(self, request):
         if 'upload' in request.POST:
-            return redirect('image_upload')
+            redirect_url = reverse('image_upload')
+            parameters = urlencode({'blog': self.id})
+            url = f'{redirect_url}?{parameters}'
+            return redirect(url)
         else:
             return redirect('detail', blog_id=self.id)
 
@@ -38,8 +43,6 @@ class Blog(models.Model):
 
     def sort_content(self):
         self.sort_content = re.split('<html>|</html>', self.content)
-        if len(self.sort_content) % 2 == 0:
-            self.sort_content.append("")
 
     def info_content(self):
         self.sort_content()
@@ -81,3 +84,9 @@ class Blog(models.Model):
 class ContentImage(models.Model):
     blog = models.ForeignKey(Blog, on_delete=models.PROTECT)
     content_image = models.ImageField(upload_to='blog_content_images/')
+
+    @classmethod
+    def delete_image(cls, request):
+        image_id = request.POST.get('delete_image_id')
+        image = get_object_or_404(cls, id=image_id)
+        image.delete()

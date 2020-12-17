@@ -39,7 +39,7 @@ class SignUpForm(forms.Form):
         password = self.cleaned_data.get('enter_password')
         retyped = self.cleaned_data.get('retype_password')
         if password and retyped and (password != retyped):
-            self.add_error('上とパスワードが一致しません')
+            self.add_error('retype_password', '上とパスワードが一致しません')
 
     def save(self):
         username = self.cleaned_data.get('username')

@@ -7,6 +7,8 @@ from applications.models import MontyHole
 
 import random
 
+nums = [1, 2, 3]
+
 
 def monty_open(res, ans):
     nums = [1, 2, 3]
@@ -18,9 +20,6 @@ def monty_open(res, ans):
         nums.remove(ans)
         result = nums[0]
     return result
-
-
-nums = [1, 2, 3]
 
 
 def show_percentage():
@@ -91,18 +90,11 @@ def index(request):
 
     restart = False
     p_changed, p_not_changed = show_percentage()
-    dict = {'nums': nums,
-            'res': res,
-            'ans': ans,
-            'opened': opened,
-            'open': open,
-            'change': change,
-            'judge': judge,
-            'restart': restart,
-            'p_changed': p_changed,
-            'p_not_changed': p_not_changed
-            }
-    return TemplateResponse(request, "monty_hole/index.html", dict)
+    context = {'nums': nums, 'res': res, 'ans': ans, 'opened': opened,
+               'open': open, 'change': change, 'judge': judge,
+               'restart': restart, 'p_changed': p_changed,
+               'p_not_changed': p_not_changed}
+    return TemplateResponse(request, "monty_hole/index.html", context)
 
 
 def result(request):
@@ -121,24 +113,17 @@ def result(request):
             change = True
         if open == ans:
             judge = True
-    except:
+    except ValueError:
         change = ""
         judge = ""
 
     restart = True
     p_changed, p_not_changed = show_percentage()
-    dict = {'nums': nums,
-            'res': res,
-            'ans': ans,
-            'opened': opened,
-            'open': open,
-            'change': change,
-            'judge': judge,
-            'restart': restart,
-            'p_changed': p_changed,
-            'p_not_changed': p_not_changed
-            }
-    if "" not in list(dict.values()):
-        return TemplateResponse(request, "monty_hole/index.html", dict)
+    context = {'nums': nums, 'res': res, 'ans': ans, 'opened': opened,
+               'open': open, 'change': change, 'judge': judge,
+               'restart': restart, 'p_changed': p_changed,
+               'p_not_changed': p_not_changed}
+    if "" not in list(context.values()):
+        return TemplateResponse(request, "monty_hole/index.html", context)
     else:
         return redirect('index')

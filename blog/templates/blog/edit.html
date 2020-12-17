@@ -13,9 +13,14 @@
     <br>
     <br>
     {% if confirm %}
-      <p>本当に削除しますか？</p>
-      <input type="submit" name="confirmed" value="はい">
-      <input type="submit" name="confirmed" value="いいえ">
+      {% if confirm != 'error' %}
+        <p>本当に削除しますか？</p>
+        <input type="submit" name="confirmed" value="はい">
+        <input type="submit" name="confirmed" value="いいえ">
+      {% else %}
+        <input type="submit" name='delete' value="削除">
+        <p>紐づけ画像を削除してください</p>
+      {% endif %}
     {% else %}
       <input type="submit" name='delete' value="削除">
     {% endif %}

@@ -12,16 +12,13 @@ urlpatterns = [
     path('signup/', blog.views.signup, name='signup'),
     path('login/',
          auth_views.LoginView.as_view(template_name="blog/login.html"),
-         name='login'
-         ),
+         name='login'),
     path('logout/',
          auth_views.LogoutView.as_view(next_page="list"),
-         name='logout'
-         ),
+         name='logout'),
     path('accounts/login/', base.RedirectView.as_view(pattern_name="login")),
     path('accounts/profile/',
-         base.RedirectView.as_view(pattern_name="user_menu")
-         ),
+         base.RedirectView.as_view(pattern_name="user_menu")),
     path('userMenu', blog.views.user_menu, name='user_menu'),
     path('<int:blog_id>/edit', blog.views.edit, name='edit'),
     path('text_list', blog.views.blog_text_list, name='text_list'),

@@ -1,5 +1,5 @@
 from django.template.response import TemplateResponse
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 
 from blog.models import Blog, ContentImage
@@ -11,7 +11,7 @@ def blog_list(request):
     blogs = Blog.get_list(request)
     blogs, page_info = get_pagination(request, blogs, per_page=5)
     for blog in blogs:
-        blog.info_content()
+        blog.info_content()  # 50字まで内容を表示する
     page = page_info[0]
     page_max = page_info[1]
     page_range = page_info[2]
@@ -54,12 +54,6 @@ def user_menu(request):
     return TemplateResponse(request, 'blog/userMenu.html', {})
 
 
-def delete_image(request):
-    image_id = request.POST.get('delete_image_id')
-    image = get_object_or_404(ContentImage, id=image_id)
-    image.delete()
-
-
 @login_required
 def edit(request, blog_id):
     blog = Blog.get_detail(request, blog_id)
@@ -69,26 +63,29 @@ def edit(request, blog_id):
     if request.method == 'POST':
         form = BlogForm(request.POST, request.FILES, instance=blog)
 
-        if 'delete_image' in request.POST:  # 紐づけ画像の削除
-            delete_image(request)
-        elif 'delete' in request.POST:  # 削除ボタンを押す
-            confirm = True  # 確認画面へ
-        elif 'confirmed' in request.POST:  # 確認画面での選択
+        if 'delete_image' in request.POST:    # 紐づけ画像の削除
+            ContentImage.delete_image(request)
+        elif 'delete' in request.POST:        # 削除ボタンを押す
+            if not images.exists():           # 紐づけ画像が存在しない
+                confirm = True                # 確認画面へ
+            else:                             # 紐づけ画像が存在する
+                confirm = 'error'
+        elif 'confirmed' in request.POST:     # 確認画面での選択
             if request.POST['confirmed'] == "はい":
-                blog.delete()  # 削除実行
-                return redirect('text_list')
-        elif form.is_valid():  # 内容変更の保存
+                if not images.exists():        # 紐づけ画像が存在しない
+                    blog.delete()             # 削除実行
+                    return redirect('text_list')
+                else:                         # 紐づけ画像が存在する
+                    confirm = 'error'
+        elif form.is_valid():                 # 内容変更の保存
             blog = form.save()
             return blog.save_next(request)
 
     else:
         form = BlogForm(instance=blog)
 
-    context = {'form': form,
-               'blog_id': blog_id,
-               'confirm': confirm,
-               'images': images,
-               }
+    context = {'form': form, 'blog_id': blog_id, 'confirm': confirm,
+               'images': images}
     return TemplateResponse(request, 'blog/edit.html', context)
 
 
@@ -112,21 +109,24 @@ def image_upload(request):
             image = form.save()
             return redirect('edit', blog_id=image.blog.id)
     else:
-        form = ContentImageForm()
+        blog_id = request.GET.get('blog')
+        if blog_id:
+            form = ContentImageForm({'blog': blog_id})
+        else:
+            form = ContentImageForm()
     return TemplateResponse(request, 'blog/addImage.html', {'form': form})
 
 
 @login_required
 def image_list(request):
-    blogs_inc_image = Blog.objects.filter(image__isnull=False
-                                          ).exclude(image=''
-                                                    ).order_by('-published_at')
-    content_images = ContentImage.objects.all()
-    blogs, c_imgs, page_info = page_for_two(request,
-                                            blogs_inc_image,
-                                            content_images,
-                                            p_page_blogs=10,
-                                            p_page_imgs=20)
+    blogs_inc_image = Blog.objects.filter(
+        image__isnull=False
+    ).exclude(image='').order_by('-published_at')
+    content_images = ContentImage.objects.all().order_by('blog')
+    blogs, c_imgs, page_info = page_for_two(
+        request, blogs_inc_image, content_images, p_page_blogs=10,
+        p_page_imgs=20
+    )
     page = page_info[0]
     page_max = page_info[1]
     page_range = page_info[2]
