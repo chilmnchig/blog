@@ -72,7 +72,7 @@ def edit(request, blog_id):
                 confirm = 'error'
         elif 'confirmed' in request.POST:     # 確認画面での選択
             if request.POST['confirmed'] == "はい":
-                if not images.exists():        # 紐づけ画像が存在しない
+                if not images.exists():       # 紐づけ画像が存在しない
                     blog.delete()             # 削除実行
                     return redirect('text_list')
                 else:                         # 紐づけ画像が存在する

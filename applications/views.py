@@ -74,9 +74,9 @@ def index(request):
             if open == ans:
                 judge = True
             MontyHole.objects.create(change=change, judge=judge)
-            dict = {'res': res, 'ans': ans, 'opened': opened, 'open': open}
+            context = {'res': res, 'ans': ans, 'opened': opened, 'open': open}
             base_url = reverse('result')
-            query_string = urlencode(dict)
+            query_string = urlencode(context)
             url = "{}?{}".format(base_url, query_string)
             return redirect(url)
 
