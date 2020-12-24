@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from blog.models import Blog, ContentImage
+from blog.models import Blog, ContentImage, Category
 
 
 class ContentImageInline(admin.TabularInline):
@@ -20,5 +20,11 @@ class ContentImageAdmin(admin.ModelAdmin):
     list_display = ('blog', 'content_image')
 
 
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+    ordering = ('name',)
+
+
 admin.site.register(Blog, BlogAdmin)
 admin.site.register(ContentImage, ContentImageAdmin)
+admin.site.register(Category, CategoryAdmin)

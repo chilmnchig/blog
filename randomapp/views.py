@@ -12,7 +12,7 @@ def perform(request):
             max = int(request.GET.get("max"))
             result = randint(min, max)
             error = False
-        except:
+        except ValueError:
             result = "正しく整数を入力してください"
             error = True
     else:

@@ -9,7 +9,8 @@ def search_objects(objects, keyword):
     q_list = re.split(' |　', keyword)
     query = reduce(
         and_,
-        [Q(title__icontains=q) | Q(content__icontains=q) for q in q_list]
+        [(Q(title__icontains=q) | Q(content__icontains=q) |
+         Q(category__name__icontains=q)) for q in q_list]
     )
     objects = objects.filter(query)
     return objects

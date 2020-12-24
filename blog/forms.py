@@ -2,7 +2,7 @@ from django import forms
 
 from django.contrib.auth.models import User
 
-from blog.models import Blog, ContentImage
+from blog.models import Blog, ContentImage, Category
 
 
 class BlogForm(forms.ModelForm):
@@ -12,6 +12,7 @@ class BlogForm(forms.ModelForm):
             'title',
             'content',
             'is_public',
+            'category',
             'image',
             'published_at',
         )
@@ -52,4 +53,10 @@ class SignUpForm(forms.Form):
 class ContentImageForm(forms.ModelForm):
     class Meta:
         model = ContentImage
+        fields = '__all__'
+
+
+class CategoryForm(forms.ModelForm):
+    class Meta:
+        model = Category
         fields = '__all__'

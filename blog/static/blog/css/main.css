@@ -175,7 +175,7 @@ header .query {
 }
 
 
-.blog-info-published_at {
+.blog-info-last {
   font-size: 14px;
   text-align: right;
   padding: 7px 14px 7px 0;
@@ -187,7 +187,7 @@ header .query {
 }
 
 
-.blog-detail-published_at {
+.blog-detail-subinfo {
   text-align: right;
   color: rgba(0, 0, 0, 0.6);
 }

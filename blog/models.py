@@ -9,6 +9,19 @@ from blog.search import search_objects
 import re
 
 
+class Category(models.Model):
+    name = models.CharField(max_length=255)
+
+    class Meta:
+        db_table = 'category'
+        verbose_name = 'カテゴリー'
+        verbose_name_plural = 'カテゴリー'
+        ordering = ['name']
+
+    def __str__(self):
+        return self.name
+
+
 class Blog(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField()
@@ -16,6 +29,8 @@ class Blog(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     published_at = models.DateTimeField(blank=True, null=True)
     is_public = models.BooleanField(default=False)
+    category = models.ForeignKey(Category, on_delete=models.PROTECT,
+                                 blank=True, null=True)
     image = models.ImageField(upload_to='blog_images/', null=True, blank=True)
 
     class Meta:

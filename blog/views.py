@@ -3,7 +3,7 @@ from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 
 from blog.models import Blog, ContentImage
-from blog.forms import BlogForm, SignUpForm, ContentImageForm
+from blog.forms import BlogForm, SignUpForm, ContentImageForm, CategoryForm
 from blog.paginator import get_pagination, page_for_two
 
 
@@ -122,7 +122,7 @@ def image_list(request):
     blogs_inc_image = Blog.objects.filter(
         image__isnull=False
     ).exclude(image='').order_by('-published_at')
-    content_images = ContentImage.objects.all().order_by('blog')
+    content_images = ContentImage.objects.all().order_by('-blog__published_at')
     blogs, c_imgs, page_info = page_for_two(
         request, blogs_inc_image, content_images, p_page_blogs=10,
         p_page_imgs=20
@@ -133,3 +133,15 @@ def image_list(request):
     context = {'blogs': blogs, 'content_images': c_imgs,
                'page': page, 'page_max': page_max, 'page_range': page_range}
     return TemplateResponse(request, 'blog/image_list.html', context)
+
+
+@login_required
+def add_category(request):
+    if request.method == 'POST':
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('user_menu')
+    else:
+        form = CategoryForm()
+    return TemplateResponse(request, 'blog/addCategory.html', {'form': form})

@@ -72,7 +72,7 @@
     padding: 0 12px;
   }
 
-  .blog-info-published_at {
+  .blog-info-last {
     padding-top: 5px;
     padding-bottom: 5px;
   }
@@ -81,7 +81,7 @@
     font-size: 14px;
   }
 
-  .blog-detail-published_at {
+  .blog-detail-subinfos {
     font-size: 12px;
   }
 

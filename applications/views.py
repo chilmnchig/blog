@@ -7,7 +7,7 @@ from applications.models import MontyHole
 
 import random
 
-nums = [1, 2, 3]
+nums = {1, 2, 3}
 
 
 def monty_open(res, ans):

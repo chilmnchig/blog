@@ -4,7 +4,7 @@ from django.utils import timezone
 
 from datetime import timedelta
 
-from .testing import (factory_blog, factory_user,
+from .testing import (factory_blog, factory_user, factory_category,
                       factory_image, factory_content_image)
 
 
@@ -14,7 +14,8 @@ class TestBlogList(TestCase):
 
     def test_get(self):
         b1 = factory_blog(published_at=timezone.now())
-        b2 = factory_blog(published_at=timezone.now() - timedelta(1))
+        b2 = factory_blog(published_at=timezone.now() - timedelta(1),
+                          category=factory_category())
         b3 = factory_blog(
             is_public=False,
             published_at=timezone.now() - timedelta(2)
@@ -24,23 +25,12 @@ class TestBlogList(TestCase):
         self.assertEqual(len(res.context['blogs']), 2)
         self.assertEqual(res.context['blogs'][0], b1)
         self.assertEqual(res.context['blogs'][1], b2)
+        self.assertEqual(res.context['blogs'][1].category.name, 'カテゴリー1')
 
-
-class TestBlogListLogIn(TestCase):
-    def _getTarget(self):
-        return reverse('list')
-
-    def setUp(self):
+        # ログイン
         self.user = factory_user()
         self.client.force_login(self.user)
 
-    def test_get(self):
-        b1 = factory_blog(published_at=timezone.now())
-        b2 = factory_blog(published_at=timezone.now() - timedelta(1))
-        b3 = factory_blog(
-            is_public=False,
-            published_at=timezone.now() - timedelta(2)
-        )
         res = self.client.get(self._getTarget())
         self.assertTemplateUsed(res, 'blog/list.html')
         self.assertEqual(len(res.context['blogs']), 3)
@@ -62,20 +52,13 @@ class TestBlogDetail(TestCase):
         self.assertEqual(res1.context['blog'], b1)
         self.assertEqual(res2.status_code, 404)
 
-
-class TestBlogDetailLogIn(TestCase):
-    def _getTarget(self, **kwargs):
-        return reverse('detail', kwargs=kwargs)
-
-    def setUp(self):
+        # ログイン
         self.user = factory_user()
         self.client.force_login(self.user)
 
-    def test_get(self):
-        b1 = factory_blog(is_public=False)
-        res = self.client.get(self._getTarget(blog_id=b1.id))
+        res = self.client.get(self._getTarget(blog_id=b2.id))
         self.assertTemplateUsed(res, 'blog/detail.html')
-        self.assertEqual(res.context['blog'], b1)
+        self.assertEqual(res.context['blog'], b2)
 
 
 class TestUserMenu(TestCase):

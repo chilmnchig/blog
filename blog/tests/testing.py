@@ -5,6 +5,12 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 import blog.models
 
 
+def factory_category(**kwargs):
+    d = {'name': 'カテゴリー1'}
+    d.update(kwargs)
+    return blog.models.Category.objects.create(**d)
+
+
 def factory_blog(**kwargs):
     d = {
         'title': 'ブログテスト',
@@ -44,6 +50,6 @@ def factory_content_image(**kwargs):
         'content_image': img
     }
     d.update(kwargs)
-    if not 'blog' in d:
+    if 'blog' not in d:
         d['blog'] = factory_blog()
     return blog.models.ContentImage.objects.create(**d)

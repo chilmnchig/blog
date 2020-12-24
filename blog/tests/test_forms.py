@@ -5,7 +5,7 @@ from urllib.parse import urlencode
 
 from .testing import (factory_user, factory_blog,
                       factory_content_image, factory_image)
-from blog.models import Blog, ContentImage
+from blog.models import Blog, ContentImage, Category
 
 
 class TestBlogAdd(TestCase):
@@ -401,3 +401,41 @@ class TestImageUpload(TestCase):
         self.assertEqual(uploaded.blog, b)
 
         self.assertRedirects(res, reverse('edit', kwargs={'blog_id': b.id}))
+
+
+class TestAddCategory(TestCase):
+    def _getTarget(self):
+        return reverse('add_category')
+
+    def setUp(self):
+        self.user = factory_user()
+        self.client.force_login(self.user)
+
+    def test_get(self):
+        res = self.client.get(self._getTarget())
+        self.assertTemplateUsed(res, 'blog/addCategory.html')
+        self.assertIn('form', res.context)
+
+    def test_post_invalid(self):
+        res = self.client.post(
+            self._getTarget(),
+            data={}
+        )
+        self.assertTemplateUsed(res, 'blog/addCategory.html')
+        self.assertEqual(res.context['form'].errors['name'],
+                         ['このフィールドは必須です。'])
+
+    def test_post_valid(self):
+        res = self.client.post(
+            self._getTarget(),
+            data={
+                'name': 'カテゴリー作成'
+            }
+        )
+        self.assertEqual(res.status_code, 302)
+
+        self.assertEqual(Category.objects.count(), 1)
+        category = Category.objects.first()
+        self.assertEqual(category.name, 'カテゴリー作成')
+
+        self.assertRedirects(res, reverse('user_menu'))

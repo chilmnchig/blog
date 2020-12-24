@@ -26,7 +26,10 @@
               <a href='{% url "detail" blog.id %}'>詳しく読む</a>
             </div>
             {% if blog.image %}
-              <div class="blog-info-published_at">
+              <div class="blog-info-last">
+                {% if blog.category %}
+                  カテゴリー:<a href='?keyword={{ blog.category }}'>{{ blog.category }}</a>
+                {% endif %}
                 {{ blog.published_at.date }}
               </div>
             {% endif %}
@@ -43,7 +46,10 @@
         </div>
         {% if not blog.image %}
         <div class="blog-info-footer">
-          <div class="blog-info-published_at">
+          <div class="blog-info-last">
+            {% if blog.category %}
+              カテゴリー:<a href='?keyword={{ blog.category }}'>{{ blog.category }}</a>
+            {% endif %}
             {{ blog.published_at.date }}
           </div>
         </div>

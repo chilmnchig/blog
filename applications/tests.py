@@ -22,7 +22,7 @@ class TestMontyHole(TestCase):
                 'select': '1',
             }
         )
-        self.assertEqual(res.context['nums'], nums)
+        self.assertEqual(res.context['nums'], {1, 2, 3})
         self.assertEqual(res.context['res'], 1)
         self.assertIn(res.context['ans'], nums)
         nums.remove(res.context['ans'])
