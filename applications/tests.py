@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.urls import reverse
 
 from .models import MontyHole
-from .views import monty_open, show_percentage
+from .views.monty_hole import monty_open
 
 
 class TestMontyHole(TestCase):
@@ -126,7 +126,7 @@ class TestShowPercentage(TestCase):
         for i in range(25):
             MontyHole.objects.create(change=True, judge=False)
             MontyHole.objects.create(change=False, judge=True)
-        self.assertEqual((75, 25), show_percentage())
+        self.assertEqual((75, 25), MontyHole.show_percentage())
 
     def test_zero_objects(self):
-        self.assertEqual((0, 0), show_percentage())
+        self.assertEqual((0, 0), MontyHole.show_percentage())
