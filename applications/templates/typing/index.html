@@ -1,0 +1,44 @@
+{% load static %}
+<!doctype html>
+<html lang="ja">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+    <link href="{% static 'typing/css/main.css' %}" rel="stylesheet" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
+    <title>タイピング</title>
+  </head>
+  <body>
+    <div class="container text-center mt-4">
+      <div class="start h3">スペースキーで開始</div>
+      {% for proverb in proverbs %}
+        <div class="proverb" id="{{ proverb.0 }}">
+          <div class="main h3">{{ proverb.1 }}</div>
+          <div class="kana">{{ proverb.2 }}</div>
+          <div class="roma">{{ proverb.3 }}</div>
+          <div class="output"><br></div>
+          <div class="index">{{ proverb.0 }}/15</div>
+          <div class="restart"><br><a href="">やり直す</a></div>
+        </div>
+      {% endfor %}
+      <div class="result">
+        <h3>結果</h3>
+        <div class="score">e-typingスコア:<span></span></div>
+        <div class="time">タイム:<span></span></div>
+        <div class="count">入力文字数:<span></span></div>
+        <div class="wpm">1分間当たり:<span></span></div>
+        <div class="miss">ミス:<span></span></div>
+        <div class="percent">正確率:<span></span></div>
+        <div class="restart text-center"><br><a href="">やり直す</a></div>
+      </div>
+    </div>
+
+    <script src="{% static 'typing/js/script.js' %}"></script>
+  </body>
+</html>

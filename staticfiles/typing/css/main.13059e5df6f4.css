@@ -1,0 +1,19 @@
+.proverb, .result {
+  display: none;
+}
+
+.output {
+  color: rgba(237, 175, 0, 1);
+}
+
+.result div{
+  width: 160px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.result span{
+  display: inline-block;
+  float: right;
+  text-align: right;
+}

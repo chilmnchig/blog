@@ -1,8 +1,7 @@
 from django.template.response import TemplateResponse
 
 from random import randint, choice
-
-from randomapp.weapon_names import weapon_names
+import csv
 
 
 def perform(request):
@@ -25,9 +24,18 @@ def perform(request):
 
 
 def weapon(request):
-    weapon_list = weapon_names.split("\n")
+    with open('randomapp/weapon_names.csv') as f:
+        weapon_list = list(csv.reader(f))
     if request.GET.get('display'):
-        result = choice(weapon_list)
+        result = choice(weapon_list)[0]
     else:
         result = ""
     return TemplateResponse(request, 'random/weapon.html', {'result': result})
+
+
+# %% テスト
+if __name__ == '__main__':
+    with open('randomapp/weapon_names.csv') as f:
+        weapon_list = list(csv.reader(f))
+    result = choice(weapon_list)[0]
+    print(result)
