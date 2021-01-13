@@ -3,6 +3,7 @@ from django.template.response import TemplateResponse
 import csv
 from random import sample
 import re
+import json
 
 
 def index(request):
@@ -10,13 +11,11 @@ def index(request):
         rows = list(csv.reader(f))
     selected_rows = sample(rows, 15)
     proverbs = []
-    i = 1
     for proverb in selected_rows:
         string = ''.join(proverb)
         lis = re.split('（|）', string)
-        lis.insert(0, i)
         proverbs.append(lis)
-        i += 1
+    proverbs = dict(enumerate(proverbs, 1))
 
-    context = {'proverbs': proverbs}
+    context = {'proverbs': json.dumps(proverbs)}
     return TemplateResponse(request, "typing/index.html", context)

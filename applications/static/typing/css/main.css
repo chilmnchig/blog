@@ -1,9 +1,5 @@
-.proverb, .result {
-  display: none;
-}
-
 .output {
-  color: rgba(237, 175, 0, 1);
+  color: rgb(237, 175, 0);
 }
 
 .result div{
