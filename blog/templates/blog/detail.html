@@ -9,7 +9,7 @@
     {% if blog.category %}
     カテゴリー:<a href="/?keyword={{ blog.category }}">{{ blog.category }}</a>
     {% endif %}
-    更新日時:{{ blog.published_at }}
+    更新日時:{{ blog.published_at }}&emsp;
   </div>
   <div class="blog-detail-content">
     {% for blog_part in blog.sort_content %}

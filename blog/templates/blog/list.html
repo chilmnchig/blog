@@ -55,6 +55,8 @@
     </div>
     {% endif %}
   </div>
+  {% empty %}
+  <p>ブログは見つかりませんでした</p>
   {% endfor %}
   <div class="paginator">
     {% if page >= 2 %}
