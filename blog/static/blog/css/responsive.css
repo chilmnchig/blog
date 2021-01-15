@@ -1,4 +1,4 @@
-@media (max-width: 1000px ) {
+@media (max-width: 1000px) {
   .info {
     flex-direction: column
   }
@@ -18,10 +18,9 @@
     padding-top: 10px;
   }
 
-  .blog-info: {
+  .blog-info {
     margin: 3px;
   }
-
 
   .blog-info-title {
     font-size: 18px;
@@ -35,11 +34,9 @@
   .subinfo {
     width: 100%;
   }
-
 }
 
-
-@media (max-width: 670px ) {
+@media (max-width: 670px) {
   header .query {
     display: none;
   }
@@ -89,7 +86,8 @@
     padding: 0 12px;
     border-right: 0;
     border-left: 0;
-    border-radius: 0;;
+    border-radius: 0;
+    ;
   }
 
   .iframeBodyRandom {
@@ -99,5 +97,4 @@
   .iframeBodyMontyHole {
     padding-top: 120%;
   }
-
 }

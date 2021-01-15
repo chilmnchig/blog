@@ -4,48 +4,48 @@
 
 
 {% block content %}
-  <div class="text-left">
-    <h3>トップ画像一覧</h3>
-    <ul>
-      {% for blog in blogs %}
-        <li>
-          <a href='{{ blog.image.url }}'>{{ blog.image.url }}</a>
-          <span>-</span>
-          <a href='{% url "edit" blog.id %}'>{{ blog.title }}</a>
-        </li>
-      {% endfor %}
-    </ul>
-    <h3>紐づけ画像一覧</h3>
-    <ul>
-      {% for content_image in content_images %}
-        <li>
-          <a href='{{ content_image.content_image.url }}'>
-            {{ content_image.content_image.url }}
-          </a>
-          <span>-</span>
-          <a href='{% url "edit" content_image.blog.id %}'>
-            {{ content_image.blog.title }}
-          </a>
-        </li>
-      {% endfor %}
-    </ul>
-  </div>
-  <div class="paginator">
-    {% if page >= 2 %}
-      <a href="?page=1">&lt;&lt; 最初へ</a>
-      <a href="?page={{ page|add:'-1' }}">&lt; 前へ</a>
-    {% endif %}
-    {% for num in page_range %}
-      {% if page == num %}
-        <a>{{ num }}</a>
-      {% else %}
-        <a href="?page={{ num }}">{{ num }}</a>
-      {% endif %}
+<div class="text-left">
+  <h3>トップ画像一覧</h3>
+  <ul>
+    {% for blog in blogs %}
+    <li>
+      <a href="{{ blog.image.url }}">{{ blog.image.url }}</a>
+      <span>-</span>
+      <a href="{% url 'edit' blog.id %}">{{ blog.title }}</a>
+    </li>
     {% endfor %}
-    {% if page < page_max %}
-      <a href="?page={{ page|add:'1' }}">次へ &gt;</a>
-      <a href="?page={{ page_max }}">最後へ &gt;&gt;</a>
-    {% endif %}
-  </div>
-  <a href="{% url 'user_menu' %}">管理者メニューへ戻る</a>
+  </ul>
+  <h3>紐づけ画像一覧</h3>
+  <ul>
+    {% for content_image in content_images %}
+    <li>
+      <a href="{{ content_image.content_image.url }}">
+        {{ content_image.content_image.url }}
+      </a>
+      <span>-</span>
+      <a href="{% url 'edit' content_image.blog.id %}">
+        {{ content_image.blog.title }}
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+<div class="paginator">
+  {% if page >= 2 %}
+  <a href="?page=1">&lt;&lt; 最初へ</a>
+  <a href="?page={{ page|add:'-1' }}">&lt; 前へ</a>
+  {% endif %}
+  {% for num in page_range %}
+  {% if page == num %}
+  <a>{{ num }}</a>
+  {% else %}
+  <a href="?page={{ num }}">{{ num }}</a>
+  {% endif %}
+  {% endfor %}
+  {% if page < page_max %}
+  <a href="?page={{ page|add:'1' }}">次へ &gt;</a>
+  <a href="?page={{ page_max }}">最後へ &gt;&gt;</a>
+  {% endif %}
+</div>
+<a href="{% url 'user_menu' %}">管理者メニューへ戻る</a>
 {% endblock %}

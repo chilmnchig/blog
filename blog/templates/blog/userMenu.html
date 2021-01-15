@@ -3,15 +3,15 @@
 {% block title %}ユーザーメニュー{% endblock %}
 
 {% block content %}
-  <h3>メニュー</h3>
-    <ul>
-      <li><a href='{% url "text_list" %}'>タイトル一覧</a></li>
-      <li><a href='{% url "image_list" %}'>写真一覧</a></li>
-      <li><a href='{% url 'add' %}'>ブログ追加</a></li>
-      <li><a href='{% url 'add_category' %}'>カテゴリー追加</a></li>
-      <li><a href='{% url 'image_upload' %}'>写真アップロード</a></li>
-      <li><a href='{% url 'signup' %}'>ユーザー登録</a></li>
-      <li><a href='{% url 'logout' %}'>ログアウト</a></li>
-      <li><a href='{% url 'list' %}'>戻る</a></li>
-    </ul>
+<h3>メニュー</h3>
+<ul>
+  <li><a href="{% url 'text_list' %}">タイトル一覧</a></li>
+  <li><a href="{% url 'image_list' %}">写真一覧</a></li>
+  <li><a href="{% url 'add' %}">ブログ追加</a></li>
+  <li><a href="{% url 'add_category' %}">カテゴリー追加</a></li>
+  <li><a href="{% url 'image_upload' %}">写真アップロード</a></li>
+  <li><a href="{% url 'signup' %}">ユーザー登録</a></li>
+  <li><a href="{% url 'logout' %}">ログアウト</a></li>
+  <li><a href="{% url 'list' %}">戻る</a></li>
+</ul>
 {% endblock %}

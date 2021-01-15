@@ -3,7 +3,7 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from urllib.parse import urlencode
 
-from applications.models import MontyHole
+from applications.models.monty_hole import MontyHole
 
 import random
 

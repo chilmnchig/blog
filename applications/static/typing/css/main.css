@@ -2,14 +2,13 @@
   color: rgb(237, 175, 0);
 }
 
-.result div{
-  width: 160px;
+.result div {
   margin: 0 auto;
   text-align: left;
+  width: 160px;
 }
 
-.result span{
-  display: inline-block;
+.result span {
   float: right;
   text-align: right;
 }

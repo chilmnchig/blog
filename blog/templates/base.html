@@ -1,6 +1,7 @@
-{% load static %}
 <!DOCTYPE html>
+{% load static %}
 <html>
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,9 +9,10 @@
   <title>{% block title %}{% endblock %} | プログラミング練習用ブログ</title>
 
   <link href="{% static 'blog/css/main.css' %}" rel="stylesheet" type="text/css">
-  <link href="{% static 'blog/css/responsive.css' %}" rel="stylesheet" href="responsive.css">
+  <link href="{% static 'blog/css/responsive.css' %}" rel="stylesheet">
   <link rel="icon" href="{% static 'blog/img/favicon.png' %}">
 </head>
+
 <body>
 
   {% block header %}
@@ -30,26 +32,26 @@
   {% endblock %}
 
   {% block main %}
-    <div class="wrapper">
-      <div class="container">
-        <div class="info">
-          <div class="contents">
-            <div class="contents-container">
-              {% block content %}
-              {% endblock %}
-            </div>
+  <div class="wrapper">
+    <div class="container">
+      <div class="info">
+        <div class="contents">
+          <div class="contents-container">
+            {% block content %}
+            {% endblock %}
           </div>
-          <div class="subinfo">
-            <div class="subinfo-container">
-              <h3>このブログについて</h3>
-              <p>
-                当ブログはプログラミング練習の一環として、学んだことを実践的に生かせるような場をつくるために出来上がったブログサイトです。
-              </p>
-            </div>
+        </div>
+        <div class="subinfo">
+          <div class="subinfo-container">
+            <h3>このブログについて</h3>
+            <p>
+              当ブログはプログラミング練習の一環として、学んだことを実践的に生かせるような場をつくるために出来上がったブログサイトです。
+            </p>
           </div>
         </div>
       </div>
     </div>
+  </div>
   {% endblock %}
 
   {% block footer %}
@@ -63,10 +65,10 @@
       </div>
       <div class="admin">
         {% if user.is_authenticated %}
-          <a href='{% url 'user_menu' %}'>管理者メニュー</a>
-          <a href='{% url 'logout' %}'>ログアウト</a>
+        <a href="{% url 'user_menu' %}">管理者メニュー</a>
+        <a href="{% url 'logout' %}">ログアウト</a>
         {% else %}
-          <a href='{% url 'login' %}'>管理者ログイン</a>
+        <a href="{% url 'login' %}">管理者ログイン</a>
         {% endif %}
       </div>
     </div>
@@ -74,4 +76,5 @@
   {% endblock %}
 
 </body>
+
 </html>

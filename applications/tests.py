@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse
 
-from .models import MontyHole
+from .models.monty_hole import MontyHole
 from .views.monty_hole import monty_open
 
 
@@ -22,7 +22,7 @@ class TestMontyHole(TestCase):
                 'select': '1',
             }
         )
-        self.assertEqual(res.context['nums'], {1, 2, 3})
+        self.assertEqual(res.context['nums'], [1, 2, 3])
         self.assertEqual(res.context['res'], 1)
         self.assertIn(res.context['ans'], nums)
         nums.remove(res.context['ans'])

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from applications.models import MontyHole
+from applications.models.monty_hole import MontyHole
 
 
 class MontyHoleAdmin(admin.ModelAdmin):

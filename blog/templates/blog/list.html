@@ -4,74 +4,74 @@
 
 
 {% block content %}
-  <div class="content-title">
-    {% if request.GET.keyword %}
-      検索結果
-    {% else %}
-      記事一覧
-    {% endif %}
-  </div>
-  <div class="content-list">
-    {% for blog in blogs %}
-      <div class="blog-info">
-        <div class="blog-info-wrapper">
-          <div class="blog-info-left">
-            <div class="blog-info-title">
-              <a href='{% url "detail" blog.id %}'>
-                {{ blog.title }}{% if not blog.is_public %}(非公開){% endif %}
-              </a>
-            </div>
-            <div class="blog-info-content">
-              {{ blog.info_content }}
-              <a href='{% url "detail" blog.id %}'>詳しく読む</a>
-            </div>
-            {% if blog.image %}
-              <div class="blog-info-last">
-                {% if blog.category %}
-                  カテゴリー:<a href='?keyword={{ blog.category }}'>{{ blog.category }}</a>
-                {% endif %}
-                {{ blog.published_at.date }}
-              </div>
-            {% endif %}
-          </div>
-          {% if blog.image %}
-            <div class="blog-info-right">
-              <div class="blog-info-img">
-                <a href='{% url "detail" blog.id %}'>
-                  <img src="{{ blog.image.url }}" alt="{{ blog.title }}" width=100% height=auto>
-                </a>
-              </div>
-            </div>
-          {% endif %}
+<div class="content-title">
+  {% if request.GET.keyword %}
+  検索結果
+  {% else %}
+  記事一覧
+  {% endif %}
+</div>
+<div class="content-list">
+  {% for blog in blogs %}
+  <div class="blog-info">
+    <div class="blog-info-wrapper">
+      <div class="blog-info-left">
+        <div class="blog-info-title">
+          <a href="{% url 'detail' blog.id %}">
+            {{ blog.title }}{% if not blog.is_public %}(非公開){% endif %}
+          </a>
         </div>
-        {% if not blog.image %}
-        <div class="blog-info-footer">
-          <div class="blog-info-last">
-            {% if blog.category %}
-              カテゴリー:<a href='?keyword={{ blog.category }}'>{{ blog.category }}</a>
-            {% endif %}
-            {{ blog.published_at.date }}
-          </div>
+        <div class="blog-info-content">
+          {{ blog.info_content }}
+          <a href="{% url 'detail' blog.id %}">詳しく読む</a>
+        </div>
+        {% if blog.image %}
+        <div class="blog-info-last">
+          {% if blog.category %}
+          カテゴリー:<a href="?keyword={{ blog.category }}">{{ blog.category }}</a>
+          {% endif %}
+          {{ blog.published_at.date }}
         </div>
         {% endif %}
       </div>
-    {% endfor %}
-    <div class="paginator">
-      {% if page >= 2 %}
-        <a href="?page=1">&lt;&lt; 最初へ</a>
-        <a href="?page={{ page|add:'-1' }}">&lt; 前へ</a>
-      {% endif %}
-      {% for num in page_range %}
-        {% if page == num %}
-          <a>{{ num }}</a>
-        {% else %}
-          <a href="?page={{ num }}">{{ num }}</a>
-        {% endif %}
-      {% endfor %}
-      {% if page < page_max %}
-        <a href="?page={{ page|add:'1' }}">次へ &gt;</a>
-        <a href="?page={{ page_max }}">最後へ &gt;&gt;</a>
+      {% if blog.image %}
+      <div class="blog-info-right">
+        <div class="blog-info-img">
+          <a href="{% url 'detail' blog.id %}">
+            <img src="{{ blog.image.url }}" alt="{{ blog.title }}" width="100%" height="auto">
+          </a>
+        </div>
+      </div>
       {% endif %}
     </div>
+    {% if not blog.image %}
+    <div class="blog-info-footer">
+      <div class="blog-info-last">
+        {% if blog.category %}
+        カテゴリー:<a href="?keyword={{ blog.category }}">{{ blog.category }}</a>
+        {% endif %}
+        {{ blog.published_at.date }}
+      </div>
+    </div>
+    {% endif %}
   </div>
+  {% endfor %}
+  <div class="paginator">
+    {% if page >= 2 %}
+    <a href="?page=1">&lt;&lt; 最初へ</a>
+    <a href="?page={{ page|add:'-1' }}">&lt; 前へ</a>
+    {% endif %}
+    {% for num in page_range %}
+    {% if page == num %}
+    <a>{{ num }}</a>
+    {% else %}
+    <a href="?page={{ num }}">{{ num }}</a>
+    {% endif %}
+    {% endfor %}
+    {% if page < page_max %}
+    <a href="?page={{ page|add:'1' }}">次へ &gt;</a>
+    <a href="?page={{ page_max }}">最後へ &gt;&gt;</a>
+    {% endif %}
+  </div>
+</div>
 {% endblock %}

@@ -6,7 +6,7 @@
 body {
   margin: 0px;
   padding: 0px;
-  font-family: "Hiragino KAKU Gothic Pro","Yu Gothic","Meiryo",sans-serif;
+  font-family: "Hiragino KAKU Gothic Pro", "Yu Gothic", "Meiryo", sans-serif;
   font-size: 100%;
   line-height: 1.5;
   font-weight: 500;
@@ -21,25 +21,27 @@ body {
 }
 
 h1 {
-    font-size : 48px;
-    line-height : 1;
-    /* 要素の高さ：48px（要素を配置するときの高さの基準の2倍）*/
+  font-size: 48px;
+  line-height: 1;
+  /* 要素の高さ：48px（要素を配置するときの高さの基準の2倍）*/
 }
 
 h2 {
-    font-size : 36px;
-    line-height : 1.3333;
-    /* 要素の高さ：48px（要素を配置するときの高さの基準の2倍） */
+  font-size: 36px;
+  line-height: 1.3333;
+  /* 要素の高さ：48px（要素を配置するときの高さの基準の2倍） */
 }
+
 h3 {
-    font-size : 24px;
-    line-height : 1;
-    /* 要素の高さ：24px（要素を配置するときの高さの基準） */
+  font-size: 24px;
+  line-height: 1;
+  /* 要素の高さ：24px（要素を配置するときの高さの基準） */
 }
-hgroup h2,h4,h5,h6 {
-    font-size : 16px;
-    line-height : 1.5;
-    /* 要素の高さ：24px（要素を配置するときの高さの基準） */
+
+hgroup h2, h4, h5, h6 {
+  font-size: 16px;
+  line-height: 1.5;
+  /* 要素の高さ：24px（要素を配置するときの高さの基準） */
 }
 
 .text-left {
@@ -68,7 +70,7 @@ header {
   transition: background-color 0.5s;
 }
 
-.header-title a:hover{
+.header-title a:hover {
   background-color: rgba(0, 0, 0, 0.05);
 }
 
@@ -76,7 +78,6 @@ header .query {
   float: right;
   margin: 10px 32px 0 0;
 }
-
 
 .wrapper {
   margin: 36px 0;
@@ -107,7 +108,6 @@ header .query {
   padding-top: 6px;
 }
 
-
 .blog-info {
   border: 1px solid rgba(0, 0, 0, 1);
   margin: 18px;
@@ -116,24 +116,20 @@ header .query {
   background-color: white;
 }
 
-
 .blog-info-wrapper {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
 }
 
-
 .blog-info-left {
   min-width: 0;
 }
-
 
 .blog-info-right {
   flex-basis: 35%;
   flex-shrink: 0;
 }
-
 
 .blog-info-title {
   text-align: left;
@@ -145,11 +141,10 @@ header .query {
   text-decoration: none;
 }
 
-.blog-info-title a:hover{
+.blog-info-title a:hover {
   color: red;
   text-decoration: underline;
 }
-
 
 .blog-info-content {
   text-align: left;
@@ -157,23 +152,19 @@ header .query {
   color: rgba(0, 0, 0, 0.7)
 }
 
-
-.blog-info-content a{
+.blog-info-content a {
   color: rgba(0, 0, 255, 0.8);
   text-decoration: none;
 }
 
-
-.blog-info-content a:hover{
+.blog-info-content a:hover {
   color: red;
   text-decoration: underline;
 }
 
-
 .blog-info-img {
   padding: 7px 12px 7px 0;
 }
-
 
 .blog-info-last {
   font-size: 14px;
@@ -181,17 +172,14 @@ header .query {
   padding: 7px 14px 7px 0;
 }
 
-
-.blog-detail h3{
+.blog-detail h3 {
   font-size: 28px;
 }
-
 
 .blog-detail-subinfo {
   text-align: right;
   color: rgba(0, 0, 0, 0.6);
 }
-
 
 .blog-detail-content {
   font-size: 18px;
@@ -199,17 +187,14 @@ header .query {
   margin: 16px;
 }
 
-
 .blog-detail-back-list {
   text-align: right;
   margin: 16px;
 }
 
-
-.blog-detail-back-list a:hover{
+.blog-detail-back-list a:hover {
   color: red;
 }
-
 
 .iframeBodyRandom {
   position: relative;
@@ -217,20 +202,17 @@ header .query {
   padding-top: 33.3%;
 }
 
-
 .iframeBodyYouTube {
   position: relative;
   width: 100%;
   padding-top: 56.25%;
 }
 
-
 .iframeBodyMontyHole {
   position: relative;
   width: 100%;
   padding-top: 75%;
 }
-
 
 iframe {
   position: absolute;
@@ -243,13 +225,10 @@ iframe {
   margin: 0;
 }
 
-
-
 .subinfo {
   width: 35%;
   text-align: center;
 }
-
 
 .subinfo-container {
   padding: 0 12px;
@@ -257,7 +236,6 @@ iframe {
   border-radius: 24px;
   background-color: rgb(245, 255, 245);
 }
-
 
 footer {
   padding-top: 8px;
@@ -275,7 +253,7 @@ footer .admin {
   text-align: right;
 }
 
-footer .admin a{
+footer .admin a {
   color: black;
   text-decoration: none;
   margin: 0 7px;
