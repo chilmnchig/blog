@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
 from urllib.parse import urlencode
+from django.contrib.sitemaps import ping_google
 
 from blog.search import search_objects
 
@@ -43,6 +44,10 @@ class Blog(models.Model):
         if not self.published_at and self.is_public:
             self.published_at = timezone.now()
         super().save(*args, **kwargs)
+        try:
+            ping_google()
+        except Exception:
+            pass
 
     def save_next(self, request):
         if 'upload' in request.POST:
